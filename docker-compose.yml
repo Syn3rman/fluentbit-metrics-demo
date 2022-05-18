@@ -6,13 +6,11 @@ services:
       context: app
     restart: always
   fluentbit:
-    image: fluent/fluent-bit
-    command: /fluent-bit/bin/fluent-bit -c /fluent-bit/etc/fluent-bit.conf
+    build:
+      context: fluentbit
     ports:
       - "8080:8080"
       - "2021:2021"
-    volumes:
-      - ./fluent.conf:/fluent-bit/etc/fluent-bit.conf
     restart: always
 
   prometheus:
