@@ -17,7 +17,7 @@ cd fluentbit-metrics-demo
 
 3. Go to `localhost:3000` and login to Grafana using credentials admin, admin
 
-4. in configuration>data sources select Prometheus and add the url as `http://fluentbit:2021/`
+4. in configuration>data sources select Prometheus and add the url as `http://prometheus:9090/`
 
 ![data source](./assets/data_source.png)
 
