@@ -7,8 +7,7 @@ RUN apt-get install -y git
 RUN git clone https://github.com/fluent/fluent-bit.git
 WORKDIR /fb/fluent-bit
 RUN git checkout leonardo-fixes-for-aditya
-RUN apt-get install -y build-essential make cmake g++ 
-RUN apt-get install -y flex bison
+RUN apt-get install -y build-essential make cmake g++ flex bison
 WORKDIR /fb/fluent-bit/build
 RUN cmake ../
 RUN make
