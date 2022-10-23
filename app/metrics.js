@@ -26,7 +26,7 @@ const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventi
 // Optional and only needed to see the internal diagnostic logging (during development)
 diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
 
-const metricExporter = new OTLPMetricExporter({'url':'http://fluentbit:8080/'});
+const metricExporter = new OTLPMetricExporter({'url':'http://fluentbit:8080/v1/metrics'});
 
 const meterProvider = new MeterProvider({
   resource: new Resource({

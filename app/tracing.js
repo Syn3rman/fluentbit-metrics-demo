@@ -10,17 +10,14 @@ const {
   DiagConsoleLogger,
   DiagLogLevel,
 } = require('@opentelemetry/api');
-const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
+// const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
 // const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-grpc');
-// const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-proto');
+const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-proto');
 
 diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
 
 const exporter = new OTLPTraceExporter({
-	url: "http://127.0.0.1:3000/traces"
-  // headers: {
-  //   foo: 'bar'
-  // },
+	url: "http://fluentbit:8080/v1/traces"
 });
 
 const provider = new BasicTracerProvider({
@@ -46,7 +43,7 @@ parentSpan.end();
 setTimeout(() => {
   // flush and close the connection.
   exporter.shutdown();
-}, 2000);
+}, 3000);
 
 function doWork(parent) {
   // Start another span. In this example, the main method already started a
@@ -60,14 +57,6 @@ function doWork(parent) {
   }
   // Set attributes to the span.
   span.setAttribute('key', 'value');
-
-  span.setAttribute('mapAndArrayValue', [
-    0, 1, 2.25, 'otel', {
-      foo: 'bar',
-      baz: 'json',
-      array: [1, 2, 'boom'],
-    },
-  ]);
 
   // Annotate our span to capture metadata about our operation
   span.addEvent('invoking doWork');
